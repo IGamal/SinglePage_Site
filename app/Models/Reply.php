@@ -9,7 +9,7 @@ class Reply extends Model
 {
     protected $fillable = ['body', 'question_id', 'user_id'];
 
-    public function likes()
+    public function like()
     {
         return $this->hasMany(Like::class);
     }
