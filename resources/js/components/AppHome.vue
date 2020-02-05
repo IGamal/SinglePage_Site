@@ -17,6 +17,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="sass">
 
 </style>

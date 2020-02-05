@@ -33,10 +33,10 @@
                 required
             ></v-text-field>
 
-            <v-btn color="green" @click="signup">Sign Up</v-btn>
+            <v-btn color="blue" @click="signup">Sign Up</v-btn>
 
             <router-link to="/login">
-                <v-btn >Login</v-btn>
+                <v-btn color="green">Login</v-btn>
             </router-link>
         </form>
     </v-container>
@@ -55,6 +55,9 @@
                 },
                 errors:{}
             }
+        },
+        created(){
+            if(User.loggedIn()) { this.$router.push({name:'forum'}) }
         },
         methods:{
             signup()

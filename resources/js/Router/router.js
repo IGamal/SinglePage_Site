@@ -3,16 +3,22 @@ import VueRouter from 'vue-router'
 import component from "vuetify/lib/util/component";
 
 import Forum from '../components/forum/Forum'
-import Login from '../components/login/login'
+import Read from '../components/forum/Read'
+import Create from '../components/forum/Create'
 import Signup from '../components/login/Signup'
+import Login from '../components/login/login'
+import Logout from '../components/login/Logout'
 
 Vue.use(VueRouter)
 
 const routes =
     [
         {path: '/forum', component: Forum, name: 'forum'},
+        {path: '/question/:slug', component:Read, name: 'read'},
+        {path: '/ask', component: Create},
+        {path: '/signup', component: Signup},
         {path: '/login', component: Login},
-        {path: '/signup', component: Signup}
+        {path: '/logout', component: Logout},
     ]
 
 const router = new VueRouter({

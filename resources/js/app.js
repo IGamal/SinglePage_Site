@@ -5,13 +5,18 @@ window.Vue = require('vue');
 import Vuetify from "../plugins/vuetify"
 import router from './Router/router.js'
 import User from './helpers/User'
+import VueSimplemde from 'vue-simplemde'
+import md from 'marked'
 
 window.User = User
+window.EventBus = new Vue();
+window.md = md
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('AppHome', require('./components/AppHome.vue').default);
+Vue.component('vue-simplemde', VueSimplemde);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
