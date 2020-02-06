@@ -2,7 +2,6 @@
     <v-card
         color="grey lighten-4"
         flat
-        height="200px"
         tile
     >
         <v-toolbar dense>
@@ -30,7 +29,7 @@
                 items:[
                         {title: "Forum", to: "/forum", show:true},
                         {title: "Ask Question", to: "/ask", show: User.loggedIn()},
-                        {title: "Category", to: "/category", show: User.loggedIn()},
+                        {title: "Category", to: "/category", show: User.Admin()},
                         {title: "Login", to: "/login", show: !User.loggedIn()},
                         {title: "Logout", to: "/logout", show: User.loggedIn()},
                     ]

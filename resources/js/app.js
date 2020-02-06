@@ -7,6 +7,8 @@ import router from './Router/router.js'
 import User from './helpers/User'
 import VueSimplemde from 'vue-simplemde'
 import md from 'marked'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
 
 window.User = User
 window.EventBus = new Vue();

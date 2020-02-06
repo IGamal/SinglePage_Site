@@ -13,7 +13,7 @@
 
             <v-card-actions v-if="own">
                 <v-btn icon small @click="edit">
-                    <v-icon>mdi-vuetify</v-icon>
+                    <v-icon color="orange">edit</v-icon>
                 </v-btn>
                 <v-btn icon small @click="destroy">
                     <v-icon color="red">delete</v-icon>

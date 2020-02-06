@@ -39,9 +39,9 @@ class CategoryController extends Controller
     {
         $request['slug'] = str_slug($request->name);
 
-        Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return response('Successfully Created', 201);
+        return response(new CategoryResource($category), 201);
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return response('Successfully Updated', 200);
+        return response(new CategoryResource($category), 200);
     }
 
     /**
