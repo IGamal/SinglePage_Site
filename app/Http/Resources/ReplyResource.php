@@ -18,8 +18,10 @@ class ReplyResource extends JsonResource
             'Identifier' => $this->id,
             'Reply' => $this->body,
             'Created' => $this->created_at->diffforhumans(),
-            'Question ID' => $this->question_id,
-            'User Name' => $this->user->name
+            'Question_ID' => $this->question_id,
+            'Question_Slug' => $this->question->slug,
+            'UserName' => $this->user->name,
+            'User_Id' => $this->user_id,
         ];
     }
 }
