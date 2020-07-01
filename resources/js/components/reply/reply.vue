@@ -4,6 +4,10 @@
             <v-card-title>
                 <div class="headline">{{reply.UserName}}</div>
                 <div class="ml-2">said {{reply.Created}}</div>
+                <v-spacer></v-spacer>
+                <Like
+                    :content="reply">
+                </Like>
             </v-card-title>
             <v-divider></v-divider>
 
@@ -12,7 +16,7 @@
                 :reply=reply
             ></edit-reply>
 
-            <v-card-text v-else v-html="replyBody"></v-card-text>
+            <v-card-text v-else v-html="reply.Reply"></v-card-text>
 
             <v-divider></v-divider>
             <div v-if="!editing">
@@ -31,10 +35,11 @@
 
 <script>
     import EditReply from './editReply'
+    import Like from '../likes/like'
     export default {
         name: "reply",
         props:['reply','index'],
-        components:{EditReply},
+        components:{EditReply, Like},
         data(){
             return{
                 editing:false,
@@ -45,10 +50,6 @@
             own()
             {
                 return User.own(this.reply.User_Id)
-            },
-            replyBody()
-            {
-                return md.parse(this.reply.Reply)
             }
         },
         created()

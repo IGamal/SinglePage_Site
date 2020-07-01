@@ -20,7 +20,7 @@
                 axios.post(`/api/${this.questionSlug}/reply`, {body:this.body})
                     .then(res=> {
                         this.body = ''
-                        EventBus.$emit('newReply', res.data)
+                        EventBus.$emit('newReply', res.data.reply)
                         window.scrollTo(0,0)
                     })
             }

@@ -4,28 +4,32 @@
         flat
         tile
     >
-        <v-toolbar dense>
+    <v-toolbar dense>
 
-            <v-toolbar-title>Discuss</v-toolbar-title>
+        <v-toolbar-title>Discuss</v-toolbar-title>
 
-            <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
-            <router-link
-                v-for="item in items"
-                :key="item.title"
-                :to="item.to"
-                v-show="item.show">
-                <v-btn>{{item.title}}</v-btn>
-            </router-link>
-        </v-toolbar>
+        <app-notification v-if="LoggedIn"></app-notification>
+        <router-link
+            v-for="item in items"
+            :key="item.title"
+            :to="item.to"
+            v-show="item.show">
+            <v-btn>{{item.title}}</v-btn>
+        </router-link>
+    </v-toolbar>
     </v-card>
 </template>
 
 <script>
+    import AppNotification from "./AppNotification";
     export default {
         name: "Toolbar",
+        components: {AppNotification},
         data() {
             return{
+                LoggedIn: User.loggedIn(),
                 items:[
                         {title: "Forum", to: "/forum", show:true},
                         {title: "Ask Question", to: "/ask", show: User.loggedIn()},
@@ -37,7 +41,7 @@
         },
         created(){
             EventBus.$on('logout', () => { User.logout() })
-        },
+        }
     }
 </script>
 
