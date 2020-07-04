@@ -1,25 +1,25 @@
 <template>
-    <v-card
-        color="grey lighten-4"
-        flat
-        tile
-    >
-    <v-toolbar dense>
+    <v-toolbar color="indigo" dark>
 
-        <v-toolbar-title>Discuss</v-toolbar-title>
+        <v-toolbar-title >
+            <router-link class="white--text" to="/">Discuss</router-link>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
         <app-notification v-if="LoggedIn"></app-notification>
-        <router-link
-            v-for="item in items"
-            :key="item.title"
-            :to="item.to"
-            v-show="item.show">
-            <v-btn>{{item.title}}</v-btn>
-        </router-link>
+
+        <div class="hidden-sm-and-down">
+            <router-link
+                v-for="item in items"
+                :key="item.title"
+                :to="item.to"
+                v-show="item.show">
+                <v-btn text>{{item.title}}</v-btn>
+            </router-link>
+        </div>
+
     </v-toolbar>
-    </v-card>
 </template>
 
 <script>

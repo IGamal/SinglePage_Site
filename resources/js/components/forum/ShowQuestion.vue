@@ -7,7 +7,7 @@
                     <span class="grey--text" >{{question.UserName}} asked {{question.Created}}</span>
                 </div>
                 <v-spacer></v-spacer>
-                <v-btn color="teal">{{question.reply_count}} Replies</v-btn>
+                <v-btn color="teal">{{ReplyCount}} Replies</v-btn>
             </v-card-title>
             <v-card-text v-html="body"></v-card-text>
 
@@ -31,13 +31,35 @@
         props: ['question'],
         data(){
             return {
-                own : User.own(this.question.UserId)
+                own : User.own(this.question.UserId),
+                ReplyCount: this.question.reply_count
             }
         },
         computed:{
             body(){
                 return md.parse(this.question.Body)
             }
+        },
+        created()
+        {
+            EventBus.$on('newReply', () => {
+                this.ReplyCount++
+            });
+
+
+            Echo.private('App.User.' + User.id())
+                .notification((notification ) =>{
+                    this.ReplyCount++
+                });
+
+            EventBus.$on('deleteReply', () => {
+                this.ReplyCount--
+            });
+            
+            Echo.channel('deleteReplyChannel')
+                .listen('DeleteReplyEvent', (e) => {
+                    this.ReplyCount--
+                });
         },
         methods:{
             edit(){

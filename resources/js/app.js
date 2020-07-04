@@ -5,12 +5,14 @@ window.Vue = require('vue');
 import Vuetify from "../plugins/vuetify"
 import router from './Router/router.js'
 import User from './helpers/User'
+import Exception from './helpers/Exception'
 import VueSimplemde from 'vue-simplemde'
 import md from 'marked'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 window.User = User
+window.Exception = Exception
 window.EventBus = new Vue();
 window.md = md
 

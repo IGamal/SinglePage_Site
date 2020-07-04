@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import component from "vuetify/lib/util/component";
 
+import Parallex from '../components/parallex'
+
 import Forum from '../components/forum/Forum'
 import Read from '../components/forum/Read'
 import Create from '../components/forum/Create'
@@ -16,6 +18,7 @@ Vue.use(VueRouter)
 
 const routes =
     [
+        {path: '/', component: Parallex },
         {path: '/forum', component: Forum, name: 'forum'},
         {path: '/question/:slug', component:Read, name: 'read'},
         {path: '/ask', component: Create},

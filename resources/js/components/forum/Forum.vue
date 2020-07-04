@@ -7,6 +7,14 @@
                     :key="question.Path"
                     :question = question>
                 </question>
+
+                <div class="text-xs-center">
+                    <v-pagination
+                        v-model="meta.current_page"
+                        :length="meta.last_page"
+                        @input="changePage">
+                    </v-pagination>
+                </div>
             </v-flex>
 
             <v-flex xs4>
@@ -24,13 +32,24 @@
         components: {AppSidebar, Question},
         data(){
             return{
-                questions:{}
+                questions:{},
+                meta:{},
             }
         },
-        created() {
-            axios.get('/api/question')
-                .then(res => this.questions = res.data.data)
-                .catch(error => console.log(error.response.data))
+        created() { this.fetchQuestions() },
+
+        methods:{
+            fetchQuestions(page)
+            {
+                let url = page ? `/api/question?page=${page}` : '/api/question'
+                axios.get(url)
+                    .then(res => {
+                        this.questions = res.data.data
+                        this.meta = res.data.meta
+                    })
+                    .catch(error => console.log(error.response.data))
+            },
+            changePage(page) { this.fetchQuestions(page)}
         }
     }
 </script>

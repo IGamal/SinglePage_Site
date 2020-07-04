@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
         }
         elseif ($exception instanceof TokenExpiredException)
         {
-            return response(['error' => 'Token is Expired'], 400);
+            return response(['error' => 'Token is Expired'], 500);
         }
         elseif ($exception instanceof JWTException)
         {

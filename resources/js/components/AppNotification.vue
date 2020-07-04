@@ -31,7 +31,8 @@
             return{
                 read : {},
                 unread : {},
-                unreadCount: 0
+                unreadCount: 0,
+                sound: "http://soundbible.com/grab.php?id=1424&type=mp3"
             }
         },
         created()
@@ -40,6 +41,7 @@
 
             Echo.private('App.User.' + User.id())
                 .notification((notification) => {
+                    this.playSound()
                     this.unread.unshift(notification)
                     this.unreadCount++
                 });
@@ -55,6 +57,7 @@
                     this.unread = res.data.unread
                     this.unreadCount = res.data.unread.length
                 })
+                    .catch(error => Exception.handle(error))
             },
             readIt(notification)
             {
@@ -65,6 +68,11 @@
                         this.read.push(notification)
                         this.unreadCount--
                     })
+            },
+            playSound()
+            {
+                let alert = new Audio(this.sound)
+                alert.play()
             }
         },
         computed:{

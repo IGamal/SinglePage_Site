@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <v-alert v-if="errors" type="error" :value="true">Category Title Can't be Blank</v-alert>
         <form>
             <v-text-field
                 v-model="form.name"
@@ -8,8 +9,8 @@
                 required
             ></v-text-field>
 
-            <v-btn color="pink" @click="update" v-if="editSlug">Update</v-btn>
-            <v-btn color="teal" @click="create" v-else>Create</v-btn>
+            <v-btn color="pink" @click="update" v-if="editSlug" :disabled="disabled">Update</v-btn>
+            <v-btn color="teal" @click="create" v-else :disabled="disabled">Create</v-btn>
 
         </form>
 
@@ -43,7 +44,8 @@
                     name: null
                 },
                 categories:{},
-                editSlug: null
+                editSlug: null,
+                errors:null
             }
         },
         created(){
@@ -59,6 +61,7 @@
                         this.categories.unshift(res.data)
                         this.form.name = null
                     })
+                    .catch(error => this.errors = error.response.data.errors)
             },
             edit(index)
             {
@@ -77,6 +80,12 @@
             destroy(slug, index){
                 axios.delete(`/api/category/${slug}`)
                     .then(res => this.categories.splice(index,1))
+            }
+        },
+        computed:{
+            disabled()
+            {
+                return !this.form.name
             }
         }
     }
